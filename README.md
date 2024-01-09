@@ -12,7 +12,7 @@ So we will going to see the process of building a web application from A to Z.
 
 ## Prerequisites for the project:
 1. Python3
-2. Django version 2.1
+2. Django version used 4.2
 3. DB Browser for SQLite
 
 ## Step 1: Initial course of actions and directory structure:
@@ -22,7 +22,7 @@ So we will going to see the process of building a web application from A to Z.
 2. Go the directory and create virtual environment and install django: 
 ***
     cd vidjan
-    pipenv install django==2.1
+    pipenv install django==4.2
 3. Create django project in current directory using django admin tool: 
 ***
     django-admin startproject vidjan .
