@@ -174,13 +174,13 @@ So we will going to see the process of building a web application from A to Z.
 5. Save the changes run the server and get page not found. but if you head over to /movies the 'Hello Word' text displays and that verifies it successfully mapped a url endpoint to a view function.
 
 ## Step 6: Models creations:
-1. Models, the python classes that represents application data. Let's create two models, genera and movie in the movies app. models.py file:
+1. Models, the python classes that represents application data. Let's create two models, genre and movie in the movies app. models.py file:
 ```python
-        # a. Create a class called genera and should derive this class from models.Model
+        # a. Create a class called genre and should derive this class from models.Model
                   # Codes: 
                           from django.db import models
 
-                          class Genera(models.Model):
+                          class Genre(models.Model):
 
             '''
             i. This means, in django has this package django.db this package has all the functionalities 
@@ -188,12 +188,12 @@ So we will going to see the process of building a web application from A to Z.
             has a class called Model. This class has lot of functionalities that is storing a model object
             in a database or retriving model object, filter them and so on.
 
-            ii. So by inheriting the genera class from the base model class in django, the genera class also 
+            ii. So by inheriting the genre class from the base model class in django, the genre class also 
             inherites all the functionalities, whcih means we do not really have to write any code to store 
-            genera objects in a database. Django will automatically take care of that. So think of the concept 
-            of genera what attributes should a genera have?
+            genre objects in a database. Django will automatically take care of that. So think of the concept 
+            of genre what attributes should a genre have?
 
-            iii. The genera is movie's label or name of the type/category. Like, is it a action movie, or 
+            iii. The genre is movie's label or name of the type/category. Like, is it a action movie, or 
             comedy or what. So define a class attribute called name.
 
             iv. And set it to an instance of a field class in django. So in the models module, we have 
@@ -202,22 +202,22 @@ So we will going to see the process of building a web application from A to Z.
             instance of the CharField class. 
 
             v. And here in the class we should pass keyword=argument. max_length, let's set this to 255 
-            characters. With this we can ensure that no genera can have a name larger than 255 characters. 
+            characters. With this we can ensure that no genre can have a name larger than 255 characters. 
             And this one way to prevent security hacks in our application. So hacker can not create a 
-            genera with 2 billion characters long. So we enforce a limit here. 
+            genre with 2 billion characters long. So we enforce a limit here. 
             '''
                   Codes:
                         from django.db import models
 
-                        class Genera(models.Model):
+                        class Genre(models.Model):
                           name = models.CharField(max_length=255)
 
-        # b. So we have Genera class now create Movie class in same way and derive this class from models.model
+        # b. So we have Genre class now create Movie class in same way and derive this class from models.model
 
                   # Codes:
                         from django.db import models
 
-                        class Genera(models.Model):
+                        class Genre(models.Model):
                           name = models.CharField(max_length=255)
 
                         class Movie(models.Model):
@@ -234,7 +234,7 @@ So we will going to see the process of building a web application from A to Z.
                   Codes:
                         from django.db import models
 
-                        class Genera(models.Model):
+                        class Genre(models.Model):
                           name = models.CharField(max_length=255)
 
                         class Movie(models.Model):
@@ -243,25 +243,25 @@ So we will going to see the process of building a web application from A to Z.
                           number_in_stock = models.IntegerFields()
                           daily_rate = models.FloatFields()
 ```
-2. Now each movie needs to be associated with a genera: how do we can do this?
+2. Now each movie needs to be associated with a genre: how do we can do this?
 ***
-        a. Here we should add another attribute genera and set this to an instance of 
+        a. Here we should add another attribute genre and set this to an instance of 
         models.ForeignKey() now with this we can create the relationship between movies and genaras.
 
-        b. And as the first argument we need to pass the genera class because we want to add a 
-        relationship between movies and genera class.
+        b. And as the first argument we need to pass the genre class because we want to add a 
+        relationship between movies and genre class.
 
         c. And as the second argument we need to pass a keyword=argument that is on_delete and with this 
-        we tell django what should happen when a genera is deleted. For example, if we have a genera called 
-        comedy and we have 5 movies in this genera, what should happen if we delete comedy?
+        we tell django what should happen when a genre is deleted. For example, if we have a genre called 
+        comedy and we have 5 movies in this genre, what should happen if we delete comedy?
 
-        d. Let's assume for this tutorial if we delete a genera all the movies associated with this genera 
+        d. Let's assume for this tutorial if we delete a genre all the movies associated with this genre 
         will be deleted. This thing we called cascading. So here we set on_delete to models.CASCADE
 ```python
               # Codes:
                     from django.db import models
 
-                    class Genera(models.Model):
+                    class Genre(models.Model):
                       name = models.CharField(max_length=255)
 
                     class Movie(models.Model):
@@ -269,7 +269,7 @@ So we will going to see the process of building a web application from A to Z.
                       realse_year = models.IntegerFields()
                       number_in_stock = models.IntegerFields()
                       daily_rate = models.FloatFields()
-                      genera = models.ForeignKey(Genera, on_delete=models.CASCADE)
+                      genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
 ```
         e. So up to this point we have two model classes that we need in the movies app. In the future, 
         we can come back and add additional classes or modify the existing ones. 
@@ -336,8 +336,8 @@ So we will going to see the process of building a web application from A to Z.
               1. Here we have class called Migration
               2. And in this class we have a couple of oparations for bringing our database up to date with 
               our current model classes. 
-                  a. The first oparation: For creating a model we can see the name is set to genera. And the 
-                  fields of genera are id and name. Note: In out code we only specify name not id, but 
+                  a. The first oparation: For creating a model we can see the name is set to genre. And the 
+                  fields of genre are id and name. Note: In out code we only specify name not id, but 
                   django automatically creates this for us. And it ensures that every object has id property, 
                   that uniquely identifies that object. 
 

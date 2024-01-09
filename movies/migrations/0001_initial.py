@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Genera',
+            name='Genre',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=255)),
@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
                 ('release_year', models.IntegerField()),
                 ('number_in_stock', models.IntegerField()),
                 ('daily_rate', models.FloatField()),
-                ('genera', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='movies.Genera')),
+                ('genre', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='movies.Genre')),
             ],
         ),
     ]
