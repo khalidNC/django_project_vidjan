@@ -183,28 +183,20 @@ So we will going to see the process of building a web application from A to Z.
                           class Genre(models.Model):
 
             '''
-            i. This means, in django has this package django.db this package has all the functionalities 
-            around working with database. This package has a module called models and this module 
-            has a class called Model. This class has lot of functionalities that is storing a model object
-            in a database or retriving model object, filter them and so on.
+            Django has this package django.db that has all the functionalities 
+            around working with database and has a module called models and this module 
+            has a class called Model.
 
-            ii. So by inheriting the genre class from the base model class in django, the genre class also 
-            inherites all the functionalities, whcih means we do not really have to write any code to store 
-            genre objects in a database. Django will automatically take care of that. So think of the concept 
-            of genre what attributes should a genre have?
+            So by inheriting the genre class from the base model class in django, the genre class also 
+            inherites all the functionalities, which means we do not really have to write any code to store 
+            genre objects in a database.
 
-            iii. The genre is movie's label or name of the type/category. Like, is it a action movie, or 
-            comedy or what. So define a class attribute called name.
-
-            iv. And set it to an instance of a field class in django. So in the models module, we have 
+            The genre is movie's label or name of the type/category. So define a class attribute called name.
+            And set it to an instance of a field class in django. So in the models module, we have 
             a bunch of field classes like, CharField to represent a database field that can contain textual 
             data, we also have IntegerField, FloatField, BooleanField and so on. So we have set this to an 
-            instance of the CharField class. 
-
-            v. And here in the class we should pass keyword=argument. max_length, let's set this to 255 
-            characters. With this we can ensure that no genre can have a name larger than 255 characters. 
-            And this one way to prevent security hacks in our application. So hacker can not create a 
-            genre with 2 billion characters long. So we enforce a limit here. 
+            instance of the CharField class. and pass keyword=argument max_length, let's set this to 255 
+            characters.
             '''
                   Codes:
                         from django.db import models
@@ -222,14 +214,13 @@ So we will going to see the process of building a web application from A to Z.
 
                         class Movie(models.Model):
             '''
-            i. Now we need to know what attribute of a movie could be? In our imaginary video rental 
-            application, we need to know the title of each movie, the year of realse, the number of 
-            these movie DVD's in stock, as well as the daily rental rate. So let's start and create 
-            these attributes:
+            Now set attribute of a movie, in our imaginary video rental application, we need to know 
+            the title of each movie, the year of realse, the number of these movie DVD's in stock, as well as 
+            the daily rental rate. So let's create these attributes:
                 1. We set the title as calling the function models.CharFields() and pass max_length
                 2. Then set realse year as IntegerFields()
                 3. Then numbers instock as IntegerFields()
-                4. then daily rate as set as FloatFields() so that we can store like 2 dollars
+                4. then daily rate as set as FloatFields()
             '''
                   Codes:
                         from django.db import models
@@ -243,7 +234,7 @@ So we will going to see the process of building a web application from A to Z.
                           number_in_stock = models.IntegerFields()
                           daily_rate = models.FloatFields()
 ```
-2. Now each movie needs to be associated with a genre: how do we can do this?
+2. Now each movie needs to be associated with a genre:
 ***
         a. Here we should add another attribute genre and set this to an instance of 
         models.ForeignKey() now with this we can create the relationship between movies and genaras.
@@ -255,7 +246,7 @@ So we will going to see the process of building a web application from A to Z.
         we tell django what should happen when a genre is deleted. For example, if we have a genre called 
         comedy and we have 5 movies in this genre, what should happen if we delete comedy?
 
-        d. Let's assume for this tutorial if we delete a genre all the movies associated with this genre 
+        d. Let's assume for this project if we delete a genre all the movies associated with this genre 
         will be deleted. This thing we called cascading. So here we set on_delete to models.CASCADE
 ```python
               # Codes:
@@ -363,11 +354,14 @@ So we will going to see the process of building a web application from A to Z.
               5. Now open the Sqlite databse once again, we can see we have a total numbers of tables. Each 
               of the tables is prefix with the name of the app that contains it. So we can see 2 tables for 
               movies app, movies_genera and movies_movie. And we can always overwrite anytime. If we expand 
-              the move table we can see the columns, for id, rease date, and so on. S owe do not have to 
+              the move table we can see the columns, for id, realse date, and so on. So we do not have to 
               create any table manually, django does for us.
               6. We have also a table for django_migrations, django uses this for keeping track of the migrations 
               that are applied on the database.
               7. So go to browse data tab and select the django_migration table. And we see the list of all 
               migrations currently applied. If you scroll down and can see the migration for the move in the 
               list with it's name along with the date time.
+
+## Step 8: Admin pannel:
+1. 
               
