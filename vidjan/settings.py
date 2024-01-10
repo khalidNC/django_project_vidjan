@@ -29,7 +29,8 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
+# Register movies apps with django so that django become aware of the model classes
+# So provieded the complete path of the MoviesConfig class from the apps module of movies package
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

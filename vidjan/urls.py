@@ -16,6 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+'''
+Added a path object to tell vidjan app that path starts with 'movies/' should be headed off to 
+the url config of movies app. So need to pass include method as 2nd argument that takes urls module from movies
+so we import include class from django's urls module.
+'''
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('movies/', include('movies.urls'))

@@ -9,6 +9,7 @@ class MovieAdmin(admin.ModelAdmin):
   list_display = ('id', 'title', 'release_year', 'number_in_stock', 'daily_rate', 'genre', 'date_created')
   # exclude = ('date_created', )
 
-# Register your models here.
+# Register models here to show them in admin interface 
+# so import Genre and Movie classes from models module in the current directory at the top
 admin.site.register(Genre, GenreAdmin)
 admin.site.register(Movie, MovieAdmin)
