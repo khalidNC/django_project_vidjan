@@ -11,5 +11,9 @@ def index(request):
   movies = Movie.objects.all()
   # Use list comprehention to retrive stirng out of the movie objects
   # Use comma separator join method to display all the movie titles on the /movies page
-  output = ', '.join([m.title for m in movies])
-  return HttpResponse(output)
+  # output = ', '.join([m.title for m in movies]). [We commented out becasue now we use render fuction to get html content]
+  # return HttpResponse(output) [We commented out becasue now we use render fuction to get html content]
+
+  # return result of render method and pass request object and template file and movies list
+  # Note: Created templates folder under movies app and added index.html file there
+  return render(request, "index.html", { "movies": movies })
