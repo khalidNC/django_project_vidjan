@@ -14,6 +14,7 @@ def index(request):
   # output = ', '.join([m.title for m in movies]). [We commented out becasue now we use render fuction to get html content]
   # return HttpResponse(output) [We commented out becasue now we use render fuction to get html content]
 
-  # return result of render method and pass request object and template file and movies list
+  # return result of render method and pass request object and template file and movies list context dictionary
   # Note: Created templates folder under movies app and added index.html file there
-  return render(request, "index.html", { "movies": movies })
+  # App-name specific html template adding movies/ prefix sicne we keep the template inside the movies folder
+  return render(request, "movies/index.html", { "movies": movies })
