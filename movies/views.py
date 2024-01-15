@@ -18,3 +18,7 @@ def index(request):
   # Note: Created templates folder under movies app and added index.html file there
   # App-name specific html template adding movies/ prefix sicne we keep the template inside the movies folder
   return render(request, "movies/index.html", { "movies": movies })
+
+# Define a view function detail for the movie detail page and initially retunrs httpresponse for the movie_id
+def detail(request, movie_id):
+  return HttpResponse(movie_id)

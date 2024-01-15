@@ -7,6 +7,10 @@ By convention have to have a urlpatterns, is a list of path object that takes an
 the root url. Also pass index just as refference not the method as the second argument to map the views to url.
 Also specify the name of module(index) with keyword:argument.
 '''
+# Add new path object to define new url parameter for movies/detail page
+# And name space set for the movie/id url as movies_detail and for index page movies_index
+# Use int: converter to convert movie_id to integer
 urlpatterns = [
-  path("", views.index, name="index")
+  path("", views.index, name="movies_index"),
+  path("<int:movie_id>", views.detail, name="movies_detail")
 ]
