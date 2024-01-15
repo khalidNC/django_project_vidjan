@@ -20,5 +20,9 @@ def index(request):
   return render(request, "movies/index.html", { "movies": movies })
 
 # Define a view function detail for the movie detail page and initially retunrs httpresponse for the movie_id
+# Create movie objects of Movie model and use get() method to get movie_id of a give id using keyword:argument like, id=movie_id
+# And now the fucntion returns the result of the render() method that takes request, template reference, and context object which is a dictionary we set a key called movie and set this to movie
 def detail(request, movie_id):
-  return HttpResponse(movie_id)
+  movie = Movie.objects.get(id=movie_id)
+  # return HttpResponse(movie_id)
+  return render(request, "movies/detail.html", {"movie": movie})
