@@ -1,5 +1,5 @@
 # Import Movie class from models module from current directory
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404
 from .models import Movie
 
@@ -23,10 +23,18 @@ def index(request):
 # Create movie objects of Movie model and use get() method to get movie_id of a give id using keyword:argument like, id=movie_id
 # And now the fucntion returns the result of the render() method that takes request, template reference, and context object which is a dictionary we set a key called movie and set this to movie
 # Add try and except the 404 error
+# def detail(request, movie_id):
+#   try:
+#     movie = Movie.objects.get(id=movie_id)
+#     # return HttpResponse(movie_id)
+#     return render(request, "movies/detail.html", {"movie": movie})
+#   except Movie.DoesNotExist:
+#     raise Http404
+  
+# Using a shortcut way to handle exception raising 404
+# Import get_object_or_404 function on top
+# Call the method while creating movie object, this function does the exception. And it takes 2 arguments:
+# first argument is the model class which is Movie, and second one is the keyword argument id=movie_id 
 def detail(request, movie_id):
-  try:
-    movie = Movie.objects.get(id=movie_id)
-    # return HttpResponse(movie_id)
-    return render(request, "movies/detail.html", {"movie": movie})
-  except Movie.DoesNotExist:
-    raise Http404
+  movie = get_object_or_404(Movie, id=movie_id)
+  return render(request, "movies/detail.html", {"movie": movie})
