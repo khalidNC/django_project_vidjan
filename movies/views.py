@@ -1,6 +1,6 @@
 # Import Movie class from models module from current directory
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from .models import Movie
 
 # Define views usally the function called index that represents the main page of an app
@@ -22,7 +22,11 @@ def index(request):
 # Define a view function detail for the movie detail page and initially retunrs httpresponse for the movie_id
 # Create movie objects of Movie model and use get() method to get movie_id of a give id using keyword:argument like, id=movie_id
 # And now the fucntion returns the result of the render() method that takes request, template reference, and context object which is a dictionary we set a key called movie and set this to movie
+# Add try and except the 404 error
 def detail(request, movie_id):
-  movie = Movie.objects.get(id=movie_id)
-  # return HttpResponse(movie_id)
-  return render(request, "movies/detail.html", {"movie": movie})
+  try:
+    movie = Movie.objects.get(id=movie_id)
+    # return HttpResponse(movie_id)
+    return render(request, "movies/detail.html", {"movie": movie})
+  except Movie.DoesNotExist:
+    raise Http404
