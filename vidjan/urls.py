@@ -16,12 +16,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# import MovieResource class from api apps, models module.
+from api.models import MovieResource
+
+# Ceated a class instance that has urls attriubute
+movie_resource = MovieResource()
+
 '''
 Added a path object to tell vidjan app that path starts with 'movies/' should be headed off to 
 the url config of movies app. So need to pass include method as 2nd argument that takes urls module from movies
 so we import include class from django's urls module.
 '''
+''' Create a new path object that tells django to include urls in movie_resource object based on the 
+resource_name which is movies with the api endpoint that starts with /api
+'''
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('movies/', include('movies.urls'))
+    path('movies/', include('movies.urls')),
+    path('api/', include(movie_resource.urls))
 ]
