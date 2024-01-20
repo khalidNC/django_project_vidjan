@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <body style="--bs-body-color: #0e0e0e;">
+    <p>
+      Welcome to our cinematic universe, where storytelling comes alive on the silver 
+      screen. Immerse yourself in a world of captivating narratives, extraordinary performances, 
+      and breathtaking visuals. From pulse-pounding action to heartwarming tales that tug at your 
+      emotions, our curated selection of movies promises an unforgettable journey for every cinephile. 
+      Whether you seek the thrill of the latest blockbuster, the allure of timeless classics, or the discovery 
+      of hidden gems, our diverse collection caters to every taste and preference. Join us in celebrating 
+      the magic of cinema, where each frame tells a unique story, and every viewing experience is a voyage 
+      into the extraordinary. Welcome to a place where the love for movies knows no 
+      bounds – <a href="{% url 'movies:index'%}">Watch here</a>
+    </p>
+  </body>
+{% endblock  %}

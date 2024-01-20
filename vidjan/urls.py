@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# Import views module from current directory to map this with url
+from . import views
+
 # import MovieResource class from api apps, models module.
 from api.models import MovieResource
 
@@ -30,8 +33,11 @@ so we import include class from django's urls module.
 ''' Create a new path object that tells django to include urls in movie_resource object based on the 
 resource_name which is movies with the api endpoint that starts with /api
 '''
+# Create a new path for homepage, empty string represents homepage
+# And the class reference on views module
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('movies/', include('movies.urls')),
-    path('api/', include(movie_resource.urls))
+    path('api/', include(movie_resource.urls)),
+    path('', views.home)
 ]
