@@ -55,6 +55,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'vidjan.urls'
 
+# Need add the line of codes os.path.join(BASE_DIR, "templates") inside the empty key value to tell django to ckeck root directory for the template. 
+# here BASE_DIR is the django default variable for referencing root directory.
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
