@@ -43,8 +43,10 @@ INSTALLED_APPS = [
     'tastypie'
 ]
 
+# Enable whitenoice middlewire by adding the middleware object from whitenoice documentation just after SecurityMiddleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -122,8 +124,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
+# Create a static_root variable and set this to the static folder path but not hardcoded, using join method here, BASE_DIR is the django default variable for referencing root directory. and the static folder is created in the root project
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 # Auto Field
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
