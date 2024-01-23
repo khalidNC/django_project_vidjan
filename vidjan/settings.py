@@ -25,7 +25,7 @@ SECRET_KEY = 't4x-xhw#aco+y@po^741k1$1m9+1q_e62ifg0904)1i^h#d2zp'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['vidjan.onrender.com']
 
 
 # Application definition
