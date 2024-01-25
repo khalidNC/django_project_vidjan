@@ -97,8 +97,12 @@ DATABASES = {
 # Created a class instance for dj-database-url and call parse method that takes external url of postgresql as string
 # And the the instance rerunrs default database and do migrate
 # DATABASES["default"] = dj_database_url.parse("postgres://vidjan_postgresql_user:gWB1CyEwJDVirOfS9YI1s9sUYxswXxMd@dpg-cmp46dicn0vc73cl2dog-a.singapore-postgres.render.com/vidjan_postgresql")
+# Check if DATABASE_URL is available (useful for local development)
 database_url = os.environ.get("DATABASE_URL")
-DATABASES['default'] = dj_database_url.parse(database_url)
+
+if database_url:
+    # Parse and set the DATABASES['default'] configuration
+    DATABASES['default'] = dj_database_url.parse(database_url)
 
 
 # Password validation
