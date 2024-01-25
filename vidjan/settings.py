@@ -23,15 +23,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 't4x-xhw#aco+y@po^741k1$1m9+1q_e62ifg0904)1i^h#d2zp'
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY").__str__
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-# ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "Localhost").split(" ")
-
+ALLOWED_HOSTS = ["*"]
+# ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 # Application definition
 # Register movies apps with django so that django become aware of the model classes
@@ -45,7 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'movies.apps.MoviesConfig',
     'api.apps.ApiConfig',
-    'tastypie'
+    'tastypie',
+    'gunicorn',
+    'whitenoise',
 ]
 
 # Enable whitenoice middlewire by adding the middleware object from whitenoice documentation just after SecurityMiddleware
