@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+# Import dj-database-url to set up posgresql databse on render
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,12 +22,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 't4x-xhw#aco+y@po^741k1$1m9+1q_e62ifg0904)1i^h#d2zp'
+# SECRET_KEY = 't4x-xhw#aco+y@po^741k1$1m9+1q_e62ifg0904)1i^h#d2zp'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = ['vidjan.onrender.com']
+# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 
 # Application definition
@@ -87,6 +92,12 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# Created a class instance for dj-database-url and call parse method that takes external url of postgresql as string
+# And the the instance rerunrs default database and do migrate
+# DATABASES["default"] = dj_database_url.parse("postgres://vidjan_postgresql_user:gWB1CyEwJDVirOfS9YI1s9sUYxswXxMd@dpg-cmp46dicn0vc73cl2dog-a.singapore-postgres.render.com/vidjan_postgresql")
+database_url = os.environ.get("DATABASE_URL")
+DATABASES['default'] = dj_database_url.parse(database_url)
 
 
 # Password validation

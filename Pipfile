@@ -8,6 +8,8 @@ django = "==4.2"
 django-tastypie = "==0.14.6"
 gunicorn = "*"
 whitenoise = "*"
+dj-database-url = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
