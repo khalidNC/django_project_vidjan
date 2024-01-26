@@ -6,7 +6,7 @@ class GenreAdmin(admin.ModelAdmin):
   list_display = ("id", "name")
 
 class MovieAdmin(admin.ModelAdmin):
-  list_display = ('id', 'title', 'release_year', 'number_in_stock', 'daily_rate', 'genre', 'date_created')
+  list_display = ('id', 'title', 'description', 'release_year', 'number_in_stock', 'daily_rate', 'genre', 'date_created', 'watch')
   # exclude = ('date_created', )
 
 # Register models here to show them in admin interface 

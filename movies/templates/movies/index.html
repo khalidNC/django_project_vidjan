@@ -5,6 +5,7 @@
     <thead>
       <tr>
         <th>Title</th>
+        <th>Watch on Youtube</th>
         <th>Genre</th>
         <th>Release Year</th>
         <th>Stock</th>
@@ -18,6 +19,10 @@
             <a href="{% url 'movies:detail' movie.id %}">{{ movie.title }}</a>
             {% comment %} <a href="{% url 'movies_detail' movie.id %}">{{ movie.title }}</a> {% endcomment %}
             {% comment %} <a href="/movies/{{ movie.id }}">{{ movie.title }}</a> example of hardcoded url {% endcomment %}
+          </td>
+          <td>
+            {% comment %} dynmic link open in new tab {% endcomment %}
+            <a href="{{ movie.watch }}" target="_blank">Link</a>
           </td>
           <td>{{ movie.genre }}</td>
           <td>{{ movie.release_year }}</td>

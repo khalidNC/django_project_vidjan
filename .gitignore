@@ -21,3 +21,4 @@ api/__pycache__/models.cpython-310.pyc
 api/migrations/__pycache__/__init__.cpython-310.pyc
 movies/__pycache__/api.cpython-310.pyc
 vidjan/__pycache__/views.cpython-310.pyc
+movies/migrations/__pycache__/0005_movie_description_movie_watch.cpython-310.pyc
