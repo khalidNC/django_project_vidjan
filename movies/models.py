@@ -22,3 +22,7 @@ class Movie(models.Model):
   genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
   date_created = models.DateTimeField(default=timezone.now)
   watch = models.URLField()
+
+  # Define a str magic method to represent string of Move class boject and this Title display on the inner page as title
+  def __str__(self):
+    return self.title.upper()
