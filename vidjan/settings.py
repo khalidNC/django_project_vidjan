@@ -22,14 +22,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 't4x-xhw#aco+y@po^741k1$1m9+1q_e62ifg0904)1i^h#d2zp'
 SECRET_KEY = os.environ.get("SECRET_KEY").__str__
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
 DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-# ALLOWED_HOSTS = ["*"]
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost 127.0.0.1").split(" ")
 
 # Application definition
@@ -96,7 +93,7 @@ DATABASES = {
 
 # Created a class instance for dj-database-url and call parse method that takes external url of postgresql as string
 # And the the instance rerunrs default database and do migrate
-# DATABASES["default"] = dj_database_url.parse("postgres://vidjan_postgresql_user:gWB1CyEwJDVirOfS9YI1s9sUYxswXxMd@dpg-cmp46dicn0vc73cl2dog-a.singapore-postgres.render.com/vidjan_postgresql")
+# DATABASES["default"] = dj_database_url.parse("external_connection_url")
 # Check if DATABASE_URL is available (useful for local development)
 database_url = os.environ.get("DATABASE_URL")
 
