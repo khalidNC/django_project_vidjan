@@ -237,7 +237,7 @@ So we will going to see the process of building a web application from A to Z.
 2. Now each movie needs to be associated with a genre:
 ***
         a. Here we should add another attribute genre and set this to an instance of 
-        models.ForeignKey() now with this we can create the relationship between movies and genaras.
+        models.ForeignKey() now with this we can create the relationship between movies and genre.
 
         b. And as the first argument we need to pass the genre class because we want to add a 
         relationship between movies and genre class.
@@ -332,7 +332,7 @@ So we will going to see the process of building a web application from A to Z.
                   django automatically creates this for us. And it ensures that every object has id property, 
                   that uniquely identifies that object. 
 
-                  b. The secound oparations: In similarly we have another create model oparation for creating 
+                  b. The secound oparations: In similarly we have created another model oparation for creating 
                   the movie table in this table we are going to have the files along with the id that we did 
                   not mention in our code but django takes care of this.
               3. Now this migration has not executed yet it simply describe the oparations that we need to be 
@@ -363,5 +363,225 @@ So we will going to see the process of building a web application from A to Z.
               list with it's name along with the date time.
 
 ## Step 8: Admin pannel:
-1. 
+1. All Djngo applications come with a powerful adminstration interface.
+2. To us the admin pannel let's create super user:
+   Run the command to create super user: python3 manage.py createsuperuser
+      a. then enter user name: ***
+      b. Then enter email address: *****
+      c. and enter password: ***
+      d. Then we see success message as output
+3. Run the development server: python3 manage.py runserver
+4. Then open the server: http://127.0.0.1:8000/ in browser and head over to /admin
+5. Adm login with the super user credentials
+6. Here default we can see and manage Users and groups
+7. Now we can easily brieng our model classes data, Movie and Genre here to manage:
+      a. Open the admin.py file under movies app/packages
+      b. Here we will register the models we want to manage using our adminstrative interface.
+      c. First we import our Genre and Movie classes. From the models module in the current folder.
+      d. And we call admin.site.register() method and pass Genre and Movie class
+````python
+            # Codes:
+                     from django.contrib import admin
+                     from .models import Genre, Movie
+
+                     # Register your models here.
+                     admin.site.register(Genre)
+                     admin.site.register(Movie)
+````
+8. So with this two lines we are telling django to register these models to the adminstration interface.
+   Now save the chnages and go to the admin site and reload the browser and see the Genre and Movie in the Movies app.
+
+## Step 9: Customize Admin pannel:
+1. When we add a new genre it shows that Genre object(1) is added
+2. Because django default generate id and 1 is the id here.
+3. Now let's imporve this separating the proper name and id
+4. If navigate to the localhost page: /admin/movies/genre/ you can see item which is Genre object(1)
+5. It shows because it is a default represent of a genere object as a string.
+6. One way to fix this is to apply the __str__ magic method in the Genre class. Let's open models.py
+````python
+            # Codes:
+                from django.db import models
+                from django.utils import timezone
+
+                class Genre(models.Model):
+                  name = models.CharField(max_length=255)
+
+                  def __str__(self):
+                    return self.name
+````
+9. To separate the id, we need to open admin.py module under the movies directory.
+10. Here we already registered Genre and Movie classes with admin. Now to customize the list of genres on admin pannel we will add another class called GenreAdmin.
+11. And this class derive from admin.ModelAdmin class
+12. This means, we alredy import admin module so the admin module has a class ModelAdmin(which represents the admin model in the admin pannel) so the GenreAdmin class inhereted all the features of the ModelAdmin class and we can override some of them. 
+13. For example, we can set list_display attribute to set the list of fields(columns) that we want to show on the admin genre list page. We set list_display to tuple, and in the tuple we specify the fields we want to show on the list page.
+14. Also we need to pass the model GenreAdmin as 2nd argument in the register() method.
+````python
+            # Codes:
+                from django.contrib import admin
+                from .models import Genre, Movie
+
+                class GenreAdmin():
+                  list_display = ('id', name)
+
+                admin.site.register(Genre, GenreAdmin)
+                admin.site.register(Movie)
+````
+15. In similar way add movies and fix move object(1) issue
+````python
+            # Codes:
+                class MovieAdmin(admin.ModelAdmin):
+                list_display = ('id', 'title', 'release_year', 'number_in_stock', 'daily_rate', 'genre', 'date_created')
+
+                admin.site.register(Genre, GenreAdmin)
+                admin.site.register(Movie, MovieAdmin)
+````
+
+## Step 10: Build APIs for the Database:
+1. So far we have built a view function to response to the request to movies/ endpoint. An currently we are only displaying text "Hello Word" and next we will display the the list of movies in our database.
+
+    a. Open the models.py module there is a Movie class. We derived this class from the Model class in django. 
+    b. But why? Because this Model class gives us a bunch of methods for creating, retriving, updating, or deleting object from our database. So if you want to store movie object in our database, you simply call one of these methods in our database. This method internally takes care of generating the right SQL statement to update our SQL database. This is we called database abstraction API. 
+    c. So the django's Model class gives us an API, Application Programming Interface. And this API abstracts away the complexity of working with database. 
+
+2. Now, see how to use this API to get the list of movie object from our database:
+    a. Let's open views.py module under the movies package
+    b. We already created index function that currently returning text "Hello Word" on the /movies page.
+    c. Now we are going to use our model api to get all the movie objects from the database.
+    d. First, import Movie class from the models module from the current folder movies package.
+````python
+            # Codes:
+                from django.shortcuts import render
+                from django.http import HttpResponse
+                # import Movie class
+                from .models import Movie
+
+                def index(request):
+                  # simply write movie.objects.all() with this statement we get all the movie objects from the database
+                  Movie.objects.all()
+                  return HttpResponse("Hello Word")
+````
+    e. This still return tex "Hello Word" and display in the index page. Now we will use list comprehension(syntext: [expresion, for item in list]) to get the title of these movies to diplay those in the index page.
+````python
+            # Codes:
+                from django.shortcuts import render
+                from django.http import HttpResponse
+                from .models import Movie
+
+                def index(request):
+                  movies = Movie.objects.all()
+                  [m.title for m in movies]
+                  return HttpResponse("Hello Word")
+````    
+    f. So we have a list of string we can join these strings using a comma separator ', '.join() these can join all the elements in our list and return string. We can store this in a variable(output) and pass the output in HttpResponse() method.
+````python
+            # Codes:
+                from django.shortcuts import render
+                from django.http import HttpResponse
+                from .models import Movie
+
+                def index(request):
+                  movies = Movie.objects.all()
+                  output = ', '.join([m.title for m in movies])
+                  return HttpResponse(output)
+````
+    g. Save the changes and reload the browser and we can see the movies are displaying on the /movies page with comma separated.
+
+## Step 11: Makeing html template to display data in a better way in the website:
+1. So far we use database abstraction api and get movie titles from the database and display on the web page, /movies.
+Now we want to return html content from the view function.
+2. Instead returning httpresponse we will call render() function. And we pass a couple of parameters:
+        a. First parameter: request object
+        b. Second parameter: name of the template
+        c. Thrid parameter: it is optional since it has a default value, context=None. context is basically a dictionary that we use to pass data to our template. In this case, we want to pass the list of movies to render as html. So here we pass a dictionary and add a key movies then set this to movies list.
+        d. and return the result of the reder function
+````python
+            # Codes in views.py module:
+                from django.shortcuts import render
+                from django.http import HttpResponse
+                from .models import Movie
+                
+                def index(request):
+                  movies = Movie.objects.all()
+                  return render(request, 'index.html', { "movies": movies })
+````
+3. Now need to create template:
+    a. In movies directory, add a new folder by convention the name will be templates because that is the name 
+    that django looks for.
+    b. Add a new file called index.html in this folder and open it.
+    c. Now just render something basic to check things are working properly:
+        - Let's add h1: Hello Word
+    d. And save the changes and reload the page, we can see the Hello Word displays on the page.
+    e. So the html content is now rendering. Next we need to improve the html template as needed.
+
+4. App's name specific html template:
+    a. There will be an issue if we flow the approach if we name index.html for a template. Because django searches
+    for all the installed apps for the template so if there is any common name for the template then it will raise error.
+    b. So the better approach is to create sub-directory for the app name specific, for an example, since we are creating template for movies app, so we will create a folder under templates folder named 'movies'.
+    c. Then move the index.html file to the movies folder.
+    d. and inside the views module, reference the movies/ prefix with idex.html template as like below:
+````python
+            # Codes:
+                return render(request, "movies/index.html", { "movies": movies })
+````
+    e. Now save the changes and reload the browser to check things are okay.
+
+## Step 12: StepAdding Bootstrap:
+1. Bootstrap, is a very popular css framework. We are going tto add this framework into the vidjan app.
+It gives the application a modern look and fit. It responsive on mobie as well so we do not need extra work for
+that. Let's start
+
+2. Go to bootstrap website: https://getbootstrap.com/
+3. Then go to documentation page: https://getbootstrap.com/docs/5.3/getting-started/introduction/
+4. Here we can find the instruction how to add bootstrap to an existing website. And we basically will add 
+    css file, it's url is given in the documentation also we can download it from here and can add as static 
+    file in our project.
+5. We can see Quick start template here as well. we copy that template
+6. Then back to our project in templates folder, inside the movies folder add a new file by convention we call
+    the file base.html so this is the basic template for all the pages in out movies app.
+7. Now paste the quick start template we just coppied.
+8. Then need change some tags according to the vidjan app.
+9. Then we need to use template tag extends at the top of the index.html template. 
+10. and We are extending the base.html template by adding movies/ prefix since the index template under the movies folder.
+
+## Step 13: Customize css layout:
+1. Now we have the table is better look. Let's use componants to improve by adding Navbar from the bootstrap doc.
+
+2. Another improvment: Currently the table takes the entire space of the page, let's make it centered. In same way by copping from the bootstrap doc.
+
+3. Also add border to this table:
+
+4. Also add hover effect by adding another class table-hover:
+
+## Step 14: Sharing a base template across the multiple apps:
+1. Currently we have the base template in movies folder. And we want to move this to the root directory.
+    a. Create a new directory and name it 'templates' in the root directory
+    b. then move the base.html file to the new templates directory
+    c. Since we have used name spacific in index.html to extends template: {% extends "movies/base.html" %}
+    d. Now need to remove the prefix movies/ form it because the base template is in root now.
+    e. Now save the changes and reload the browser
+    f. But we see an error template does not exist: If we take look at the full error message we can notice 
+    django try to check and find all installed apps templates but template has not been found. 
+    g. So we need to update the settings module under vidjan directory with some codes to tell django to check the root directory for the template. So let's open setting module and find TEMPLATES object as below:
+````python
+        Codes:
+                TEMPLATES = [
+                    {
+                        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+                        'DIRS': [os.path.join(BASE_DIR, "templates")],
+                        'APP_DIRS': True,
+                        'OPTIONS': {
+                            'context_processors': [
+                                'django.template.context_processors.debug',
+                                'django.template.context_processors.request',
+                                'django.contrib.auth.context_processors.auth',
+                                'django.contrib.messages.context_processors.messages',
+                            ],
+                        },
+                    },
+                ]
+````
+    h. And write codes in DIRS key: os.path.join(BASE_DIR, "templates") here BASE_DIR is the django default variable for referencing root directory.
+    i. Now save the changes and reload the browser and this time we can see the webpage having no errors.
+
+## Step 15: 
               
