@@ -6,6 +6,10 @@ from django.utils import timezone
 class Genre(models.Model):
   name = models.CharField(max_length=255)
 
+  # Alphabatical ordering on admin genre index page
+  class Meta:
+    ordering = ('name',)
+
   # Define a str magic method to represent string of Genera class boject
   def __str__(self):
     return self.name
@@ -22,6 +26,10 @@ class Movie(models.Model):
   genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
   date_created = models.DateTimeField(default=timezone.now)
   watch = models.URLField()
+
+    # Alphabatical ordering on admin movie index page
+  class Meta:
+    ordering = ('title',)
 
   # Define a str magic method to represent string of Move class boject and this Title display on the inner page as title
   def __str__(self):

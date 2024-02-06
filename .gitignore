@@ -23,3 +23,4 @@ movies/__pycache__/api.cpython-310.pyc
 vidjan/__pycache__/views.cpython-310.pyc
 movies/migrations/__pycache__/0005_movie_description_movie_watch.cpython-310.pyc
 movies/migrations/__pycache__/0006_alter_movie_description.cpython-310.pyc
+movies/migrations/__pycache__/0007_alter_genre_options_alter_movie_options.cpython-310.pyc
