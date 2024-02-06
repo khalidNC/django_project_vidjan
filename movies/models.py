@@ -13,7 +13,7 @@ class Genre(models.Model):
 # Similarly Genre added a Movie class and set class attributes for data generation
 class Movie(models.Model):
   title = models.CharField(max_length=255)
-  description = models.CharField(max_length=600)
+  description = models.TextField(blank=True, null=True)
   release_year = models.IntegerField()
   number_in_stock = models.IntegerField()
   daily_rate = models.FloatField()
