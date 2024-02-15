@@ -22,7 +22,8 @@
           </td>
           <td>
             {% comment %} dynmic link open in new tab {% endcomment %}
-            <a href="{{ movie.watch }}" target="_blank">Link</a>
+            {% comment %} <a href="{{ movie.watch }}" target="_blank">Link</a> {% endcomment %}
+            <a href="{% url 'movies:detail' movie.id %}">Link</a>
           </td>
           <td>{{ movie.genre }}</td>
           <td>{{ movie.release_year }}</td>

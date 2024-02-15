@@ -1,18 +1,43 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <dl>
-    <dt>Title</dt>
-    <dd>{{ movie.title }}</dd>
-    <dt>Description</dt>
-    <dd>{{ movie.description }}</dd>
-    <dt>Genre</dt>
-    <dd>{{ movie.genre }}</dd>
-    <dt>Release year</dt>
-    <dd>{{ movie.release_year }}</dd>
-    <dt>Stock</dt>
-    <dd>{{ movie.number_in_stock }}</dd>
-    <dt>Rate in USD</dt>
-    <dd>{{ movie.daily_rate }}</dd>
-  </dl>
-{% endblock  %}
+  <div style="padding-top: 250px;"> 
+    <dl>
+      <dd>
+        <a href="#" onclick="loadYoutubeVideo('{{ movie.watch }}')">Watch Link</a>
+      </dd>
+      <dt>Title</dt>
+      <dd>{{ movie.title }}</dd>
+      <dt>Description</dt>
+      <dd>{{ movie.description }}</dd>
+      <dt>Genre</dt>
+      <dd>{{ movie.genre }}</dd>
+      <dt>Release year</dt>
+      <dd>{{ movie.release_year }}</dd>
+      <dt>Stock</dt>
+      <dd>{{ movie.number_in_stock }}</dd>
+      <dt>Rate in USD</dt>
+      <dd>{{ movie.daily_rate }}</dd>
+    </dl>
+
+    <div id="youtubeFrame" class="top-frame"></div>
+
+    <style>
+      .top-frame {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 40vh; /* Adjust the height as needed */
+        background-color: #fff; /* Adjust the background color as needed */
+        z-index: 1000; /* Ensure the frame is on top of other elements */
+        overflow: hidden; /* Hide scrollbars if the content exceeds the frame */
+      }
+    </style>
+
+    <script>
+      function loadYoutubeVideo(videoUrl) {
+        document.getElementById('youtubeFrame').innerHTML = `<iframe width="100%" height="100%" src="${videoUrl}" frameborder="0" allowfullscreen></iframe>`;
+      }
+    </script>
+{% endblock %}
