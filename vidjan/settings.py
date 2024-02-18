@@ -29,6 +29,9 @@ DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost 127.0.0.1").split(" ")
 
+# Added staging host
+ALLOWED_HOSTS_STAGING = os.environ.get("ALLOWED_HOSTS_STAGING", "localhost 127.0.0.1").split(" ")
+
 # Application definition
 # Register movies apps with django so that django become aware of the model classes
 # So provieded the complete path of the MoviesConfig class from the apps module of movies package
@@ -100,6 +103,12 @@ database_url = os.environ.get("DATABASE_URL")
 if database_url:
     # Parse and set the DATABASES['default'] configuration
     DATABASES['default'] = dj_database_url.parse(database_url)
+
+# Added database for staging
+database_url_staging = os.environ.get("DATABASE_URL_STAGING")
+
+if database_url_staging:
+    DATABASES['default'] = dj_database_url.parse(database_url_staging)
 
 
 # Password validation
