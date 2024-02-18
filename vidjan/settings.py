@@ -27,13 +27,13 @@ SECRET_KEY = os.environ.get("SECRET_KEY").__str__
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-# Added staging host
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost 127.0.0.1").split(" ")
 
+# Added staging host for render platform
 allowed_host_staging = os.environ.get("ALLOWED_HOSTS_STAGING")
 
 if allowed_host_staging:
-    ALLOWED_HOSTS = os.environ.get("staging-vidjan.onrender.com", "localhost 127.0.0.1").split(" ")
+    ALLOWED_HOSTS = [allowed_host_staging]
 
 # Application definition
 # Register movies apps with django so that django become aware of the model classes
