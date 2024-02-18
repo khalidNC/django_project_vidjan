@@ -104,12 +104,6 @@ if database_url:
     # Parse and set the DATABASES['default'] configuration
     DATABASES['default'] = dj_database_url.parse(database_url)
 
-# Added database for staging
-database_url_staging = os.environ.get("DATABASE_URL_STAGING")
-
-if database_url_staging:
-    DATABASES['default'] = dj_database_url.parse(database_url_staging)
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
