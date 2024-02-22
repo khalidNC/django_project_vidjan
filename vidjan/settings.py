@@ -98,7 +98,7 @@ DATABASES = {
 }
 
 if os.environ.get("STAGING"):
-   DATABASES['dev'] = {
+   DATABASES['default'] = {
        'ENGINE': 'django.db.backends.sqlite3',
        'NAME': os.path.join(BASE_DIR, 'dev.db'),  # Separate SQLite database for staging
    }
