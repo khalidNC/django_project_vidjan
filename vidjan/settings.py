@@ -97,11 +97,11 @@ DATABASES = {
     }
 }
 
-# if os.environ.get("STAGING"):
-#    DATABASES['default'] = {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'testing.db'),  # Separate SQLite database for staging
-#    }
+if os.environ.get("STAGING"):
+   DATABASES['default'] = {
+       'ENGINE': 'django.db.backends.sqlite3',
+       'NAME': os.path.join(BASE_DIR, 'testing.db'),  # Separate SQLite database for staging
+   }
 
 # Created a class instance for dj-database-url and call parse method that takes external url of postgresql as string
 # And the the instance rerunrs default database and do migrate
