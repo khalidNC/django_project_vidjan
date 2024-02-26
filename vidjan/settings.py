@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'tastypie',
     'gunicorn',
     'whitenoise',
+    'rest_framework',
 ]
 
 # Enable whitenoice middlewire by adding the middleware object from whitenoice documentation just after SecurityMiddleware
@@ -94,6 +95,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
+
+    'test': {                                           # Django will handle this test database while running api tests
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': "test_db.sqlite3",
     }
 }
 
