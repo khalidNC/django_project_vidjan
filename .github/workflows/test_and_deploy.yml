@@ -24,3 +24,6 @@ jobs:
 
       - name: Run Unit Tests
         run: python manage.py test
+
+      - name Run API Tests
+        run: python manage.py test api
