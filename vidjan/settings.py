@@ -95,12 +95,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
-
-    'test': {                                           # Django will handle this test database while running api tests
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': "test_db.sqlite3",
     }
+
+    # 'test': {                                           # Django will handle this test database while running api tests
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': "test_db.sqlite3",
+    # }
 }
 
 # Created a class instance for dj-database-url and call parse method that takes external url of postgresql as string

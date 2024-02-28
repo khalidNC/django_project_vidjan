@@ -26,3 +26,4 @@ movies/migrations/__pycache__/0006_alter_movie_description.cpython-310.pyc
 movies/migrations/__pycache__/0007_alter_genre_options_alter_movie_options.cpython-310.pyc
 api/__pycache__/tests.cpython-310.pyc
 movies/__pycache__/tests.cpython-310.pyc
+__pycache__/test_e2e.cpython-310-pytest-8.0.2.pyc
