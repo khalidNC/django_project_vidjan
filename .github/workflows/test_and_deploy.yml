@@ -38,5 +38,4 @@ jobs:
         if: always()
         with:
           name: playwright-traces
-          path: test-results/
-          
+          path: test-results/test-e2e-py-test-vidjan-title-chromium
